@@ -1,0 +1,19 @@
+version: "3"
+services:
+  redis7:
+    restart: unless-stopped
+    image: redis:7
+    hostname: redis7
+    container_name: redis7
+    volumes:
+      - ./redis7/data/redis/cache/:/data
+      - ./redis7/conf/redis/cache/redis.conf:/etc/redis/redis.conf
+    ports:
+      - 36379:6379
+    command:
+      [
+        "redis-server",
+        "/etc/redis/redis.conf",
+        "--requirepass",
+        "${REDIS_PASSWORD}",
+      ]
